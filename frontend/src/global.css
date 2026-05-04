@@ -1,0 +1,10 @@
+/* App-level styles */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: #111827;
+  margin: 0;
+}

@@ -1,0 +1,23 @@
+{"timestamp":"2026-05-03T15:22:08.147Z","event":"register_error","meta":{"error":"\nInvalid `prisma.user.findUnique()` invocation:\n\n\nerror: Environment variable not found: DATABASE_URL.\n  -->  schema.prisma:13\n   | \n12 |   provider = \"postgresql\"\n13 |   url      = env(\"DATABASE_URL\")\n   | \n\nValidation Error Count: 1"}}
+{"timestamp":"2026-05-03T15:38:08.948Z","event":"user_registered","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-03T15:38:09.033Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-03T15:38:31.823Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T18:04:06.538Z","event":"user_registered","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T18:04:06.632Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T18:04:25.393Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T18:05:04.222Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T18:06:51.174Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T18:29:43.757Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T18:35:46.078Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T18:37:08.899Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T18:42:19.889Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T18:43:01.361Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T19:00:02.867Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T19:01:32.524Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T19:02:53.848Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T19:03:17.319Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T19:03:39.219Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T19:20:54.093Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T19:21:27.124Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
+{"timestamp":"2026-05-04T19:29:49.265Z","event":"user_login","meta":{"userId":1,"email":"sf@gmail.com"}}
+{"timestamp":"2026-05-04T19:31:34.183Z","event":"user_login","meta":{"userId":2,"email":"sfr@gmail.com"}}
