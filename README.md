@@ -26,7 +26,8 @@ Lightweight full-stack Carpool application (React + Express + Prisma). This repo
 
 A small preview of the most recent UI (simplified mock). The image is stored in the frontend assets so it can be updated along with the UI.
 
-![UI preview](frontend/src/assets/new_ui_preview.svg)
+<img width="950" height="442" alt="image" src="https://github.com/user-attachments/assets/03aad053-f7e3-4ead-a398-e9a9c8ae75a7" />
+
 
 ## Requirements
 
