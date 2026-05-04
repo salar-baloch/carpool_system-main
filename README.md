@@ -138,5 +138,5 @@ Contributions are welcome. Typical workflow:
 
 ---
 
-Happy carpooling �
+Happy carpooling 
 
