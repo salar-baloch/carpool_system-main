@@ -1,116 +1,141 @@
 # CarPool System
 
-Welcome to the Carpool Application repository! This project is a full-stack web application designed to facilitate ride-sharing among users. Built with modern web technologies, it allows users to sign up, sign in, share rides, search for available rides, and manage their ride requests. Below, you'll find all the necessary information to understand, set up, and contribute to this project.
+Lightweight full-stack Carpool application (React + Express + Prisma). This repo contains a React frontend (Vite) and an Express backend using Prisma for data access. The backend is configured to use SQLite by default for local development (see `backend/prisma/dev.db`).
 
-## Preview
+## Quick overview
 
-Here are some screenshots showcasing the application:
-
-- **Sign up**
-  ![Screenshot from 2025-01-28 20-21-58](https://github.com/user-attachments/assets/59d3a06c-c282-4fd8-85ed-212ac5ae390a)
-
-- **Sign in**
-![Screenshot from 2025-01-28 20-01-05](https://github.com/user-attachments/assets/3ba1ed60-609c-4083-be63-28c7cf953a03)
-
-- **Home Page**
-![Screenshot from 2025-01-28 20-00-38](https://github.com/user-attachments/assets/7e49fa5a-92a2-4cca-b1af-f46f0e64ba63)
-
-- **Share Rides**
-  ![Screenshot from 2025-01-28 20-05-31](https://github.com/user-attachments/assets/b68b117a-b71e-42ad-a247-976c115ce9ea)
-
-- **Search Rides**
-  ![Screenshot from 2025-01-28 20-12-17](https://github.com/user-attachments/assets/0e920364-2efc-40f7-9211-61b7e9be1758)
-
-- **Ride Management**
-![Screenshot from 2025-01-28 20-18-54](https://github.com/user-attachments/assets/dfe26117-e357-4c8a-bb11-c663eb51ea62)
-![Screenshot from 2025-01-28 20-19-57](https://github.com/user-attachments/assets/0261f333-f5ba-455d-9add-791785c4b2be)
-
+- Frontend: Vite + React, Tailwind CSS, Leaflet (maps)
+- Backend: Node + Express, Prisma (SQLite by default), JWT auth
+- Database: SQLite by default (file at `backend/prisma/dev.db`). Optional: can be pointed at PostgreSQL or another provider by changing `DATABASE_URL`.
 
 ## Features
 
-- **User Authentication**: Secure sign-up and sign-in using JWT (JSON Web Tokens).
-- **Ride Sharing**: Users can post rides with details like source, destination, time, and available seats.
-- **Ride Search**: Users can request to join a ride, and the ride owner can approve, ignore or reject the request.
-- **Ride Management**: Users can view their posted rides and the rides they are traveling to.
-- **Interactive Map**: Powered by Leaflet and OpenStreetMap for visualizing ride routes.
-- **UI Design**: Built with Tailwind CSS for a clean and visually appealing interface.
+- User authentication (JWT)
+- Share rides (create trips)
+- Search rides and request to join
+- Messaging and notifications for trips
+- Document upload and simple admin review flow
+- Ratings for completed trips
 
+## What changed from older README
 
+- The backend uses Prisma + SQLite by default (not PostgreSQL). A sample SQLite DB (`dev.db`) and migrations are included under `backend/prisma/`.
+- Frontend is a Vite app (dev server default port: 5173). Backend listens on port 3000 by default.
 
-## Tech Stack
+## Preview
 
-- **Frontend**: React, Leaflet & OpenStreetMap (for maps), Tailwind CSS
-- **Backend**: Express, CORS, JWT
-- **Database**: PostgreSQL (run using Docker)
+A small preview of the most recent UI (simplified mock). The image is stored in the frontend assets so it can be updated along with the UI.
 
-## Setup and Installation
+![UI preview](frontend/src/assets/new_ui_preview.svg)
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/your-username/flow.git
-   ```
+## Requirements
 
-2. **Install dependencies**:
-   - For the backend:
-     ```bash
-     cd backend
-     npm install
-     ```
-   - For the frontend:
-     ```bash
-     cd frontend
-     npm install
-     ```
+- Node.js (v16+ recommended)
+- npm or yarn
 
-3. **Set up PostgreSQL**:
-   - Ensure Docker is installed and running.
-   - Start a PostgreSQL container:
-     ```bash
-     docker run --name flow-postgres -e POSTGRES_USER=your_user -e POSTGRES_PASSWORD=your_password -e POSTGRES_DB=flow -p 5432:5432 -d postgres
-     ```
+## Setup (local development)
 
-4. **Configure environment variables**:
-   - Create a `.env` file in the backend directory with the following variables:
-     ```env
-     PORT=5000
-     DATABASE_URL=postgresql://your_user:your_password@localhost:5432/flow
-     JWT_SECRET=your_jwt_secret
-     ```
+1. Clone the repository
 
-5. **Run the application**:
-   - Start the backend server:
-     ```bash
-     cd backend
-     npm start
-     ```
-   - Start the frontend:
-     ```bash
-     cd frontend
-     npm start
-     ```
+```bash
+git clone <repo-url>
+cd carpool_system-main
+```
 
-6. **Access the application**:
-   Open your browser and navigate to `http://localhost:3000`.
+2. Backend
+
+- Install dependencies
+
+```bash
+cd backend
+npm install
+```
+
+- Create a `.env` in `backend/` (example values below)
+
+```env
+PORT=3000
+DATABASE_URL="file:./prisma/dev.db"
+JWT_SECRET=my_jwt_secret
+# Optional (for SMS notifications)
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+# Admin credentials used by the demo admin login
+ADMIN_EMAIL=admin@carpool.local
+ADMIN_PASSWORD=Admin@12345
+NODE_ENV=development
+```
+
+- Initialize the database (if you want to apply migrations or recreate DB)
+
+If you want to run Prisma migrations (development):
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Or to push the current schema to the database without creating a migration (fast):
+
+```bash
+npx prisma db push
+```
+
+- Start the backend server
+
+```bash
+node index.js
+```
+
+Notes:
+- The repository includes a working `backend/prisma/dev.db` for quick local testing. If you prefer PostgreSQL, set `DATABASE_URL` accordingly (the migrations folder contains SQL that can be used) and run the appropriate Docker command to start Postgres.
+
+3. Frontend
+
+- Install dependencies and run the dev server
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+- Open the frontend in your browser (Vite default):
+
+http://localhost:5173
+
+4. Common endpoints (backend)
+
+- POST /register — register a new user
+- POST /login — login (returns JWT)
+- POST /create-trip — create a ride (authenticated)
+- GET /search-rides?from=...&to=...&date=YYYY-MM-DD — search rides (authenticated)
+- POST /request-ride — request a spot (authenticated)
+
+Add the Authorization header to requests that require authentication: `Authorization: Bearer <token>`
+
+## Development tips
+
+- If you'd like automatic server reloads while editing the backend, install nodemon globally or as a dev dependency and run `npx nodemon index.js`.
+- Use the Prisma Studio UI to inspect data:
+
+```bash
+npx prisma studio --schema=prisma/schema.prisma
+```
 
 ## Contributing
 
-Contributions are welcome! To contribute:
+Contributions are welcome. Typical workflow:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bugfix.
-3. Commit your changes and push them to your fork.
-4. Submit a pull request explaining your changes.
+1. Fork
+2. Create a feature branch
+3. Open a PR with a clear description of the change
 
 ## Acknowledgments
 
-- [React](https://reactjs.org/) for the frontend framework.
-- [Express.js](https://expressjs.com/) for the backend framework.
-- [Tailwind CSS](https://tailwindcss.com/) for styling.
-- [Leaflet](https://leafletjs.com/) for map integration.
-- [OpenStreetMap](https://www.openstreetmap.org/) for map data. 
-- [PostgreSQL](https://www.postgresql.org/) for the database.
+- React, Vite, Tailwind, Express, Prisma, Leaflet
 
 ---
 
-Happy carpooling 🚀
+Happy carpooling �
 
